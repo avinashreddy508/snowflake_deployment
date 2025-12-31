@@ -4,7 +4,7 @@ import os
 conn = snowflake.connector.connect(
     user=os.environ['SNOWFLAKE_USER'],
     account=os.environ['SNOWFLAKE_ACCOUNT'],
-    private_key=os.environ['SNOWFLAKE_PRIVATE_KEY'],
+    password=os.environ['SNOWFLAKE_PASSWORD'],
     role=os.environ['SNOWFLAKE_ROLE'],
     warehouse=os.environ['SNOWFLAKE_WAREHOUSE']
 )
