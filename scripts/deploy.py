@@ -11,12 +11,19 @@ conn = snowflake.connector.connect(
 
 cur = conn.cursor()
 
+sql_found = False
+
 for root, _, files in os.walk("sql"):
     for file in sorted(files):
         if file.endswith(".sql"):
-            with open(os.path.join(root, file)) as f:
-                sql = f.read()
-                cur.execute(sql)
+            sql_found = True
+            file_path = os.path.join(root, file)
+            print(f"Executing {file_path}")
+            with open(file_path) as f:
+                cur.execute(f.read())
+
+if not sql_found:
+    raise Exception("❌ No SQL files found to execute")
 
 cur.close()
 conn.close()
